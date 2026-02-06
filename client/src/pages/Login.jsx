@@ -26,7 +26,7 @@ export default function Login() {
       toast.success("Successfully Logged In");
       nav("/");
     } catch (error) {
-      toast.error(error.response.data.error.replace(/"/g, ""));
+      toast.error(error.response);
       console.log(`LOGIN:${error.message}`);
     }
     setRequestPending(false);

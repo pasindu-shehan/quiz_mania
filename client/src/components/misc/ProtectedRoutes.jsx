@@ -1,7 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
-const SERVER_URL = import.meta.env.SERVER_URL;
+import http from "../../api/axiosInstance";
 
 export default function ProtectedRoutes() {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,12 +13,12 @@ export default function ProtectedRoutes() {
 
   async function verifyUser() {
     try {
-      const userVerificationResponse = await axios.get(
-        `${SERVER_URL}/auth/verify`,
-        { withCredentials: true },
-      );
-
-      setAuthenticated(true);
+      const userVerificationResponse = await http.get(`/auth/verify`);
+      if (userVerificationResponse) {
+        setAuthenticated(true);
+      } else {
+        nav("/login");
+      }
     } catch (error) {
       console.log(error);
 
@@ -29,14 +28,12 @@ export default function ProtectedRoutes() {
     setIsLoading(false);
   }
   if (isLoading) {
-    return (
-      <div>
-        <h1>Loading.....</h1>
-      </div>
-    );
+    return <div>Loading...</div>;
   }
+
   if (!authenticated) {
-    return null;
+    return null; // user will be redirected anyway
   }
+
   return <Outlet />;
 }
