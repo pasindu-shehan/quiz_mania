@@ -1,0 +1,18 @@
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const cookieParser = require('cookie-parser');
+const apiRouter = require("./routes/routes");
+require("dotenv").config();
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  withCredentials: true,
+}));
+app.use(cookieParser());
+app.use(express.json());
+app.use("/api", apiRouter);
+
+app.listen(5000, () => {
+  console.log("Server has started on port 5000");
+});
