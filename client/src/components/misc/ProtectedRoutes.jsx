@@ -32,7 +32,7 @@ export default function ProtectedRoutes() {
   }
 
   if (!authenticated) {
-    return null; // user will be redirected anyway
+    return null;
   }
 
   return <Outlet />;
