@@ -7,8 +7,10 @@ const {
   sendSuccessResponse,
 } = require("../utils/response.utils");
 const authService = require("../services/auth.service");
+const { logger } = require("../utils/log.utils");
 
 async function login(req, res) {
+  logger.info(`AuthController - login()`);
   try {
     const email = req.body.email;
     const password = req.body.password;
@@ -20,6 +22,7 @@ async function login(req, res) {
     });
     return sendSuccessResponse(res, { token }, "Login Successfully", 200);
   } catch (error) {
+    logger.error(`AuthController - login()`, error);
     return sendErrorResponse(res, error.message);
   }
 }

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import http from "../api/axiosInstance";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,8 +14,8 @@ export default function Login() {
     e.preventDefault();
     setRequestPending(true);
     try {
-      await axios.post(
-        `http://localhost:5000/api/auth/login`,
+      const response = await http.post(
+        `/auth/login`,
         {
           email,
           password,
@@ -23,10 +24,11 @@ export default function Login() {
           withCredentials: true,
         },
       );
+
       toast.success("Successfully Logged In");
       nav("/");
     } catch (error) {
-      toast.error(error.response);
+      toast.error(error.response?.data?.message);
       console.log(`LOGIN:${error.message}`);
     }
     setRequestPending(false);

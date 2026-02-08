@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoutes from "./components/misc/ProtectedRoutes";
 import StartQuizSession from "./pages/StartQuizSession";
+import Quiz from "./pages/Quiz";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           {/* Protected routes */}
           <Route path="/" element={<Home />} />
           <Route path="/start_quiz" element={<StartQuizSession />} />
+          <Route path="/quiz" element={<Quiz />} />
         </Route>
       </Routes>
     </BrowserRouter>

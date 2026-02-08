@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function StartQuizSession() {
   const [amount, setAmount] = useState(10);
@@ -6,17 +7,21 @@ export default function StartQuizSession() {
   const [difficulty, setDifficulty] = useState("any");
   const [type, setType] = useState("any");
 
+  const nav = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const quizConfig = {
-      amount,
-      category,
-      difficulty,
-      type,
-    };
-
-    console.log(quizConfig);
+    let navPath = `/quiz?amount=${amount}`;
+    if (category !== "any") {
+      navPath = navPath + `&category=${category}`;
+    }
+    if (type !== "any") {
+      navPath = navPath + `&type=${type}`;
+    }
+    if (difficulty !== "any") {
+      navPath = navPath + `&difficulty=${difficulty}`;
+    }
+    nav(navPath);
   };
 
   return (
