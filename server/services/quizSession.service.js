@@ -48,8 +48,8 @@ async function getQuiz(params, token) {
     // Add questions to database
 
     for (const value of questions) {
-      const question = await quizSessionDao.addQuestions(value, user_email);
-      const questionId = question[0].insertId;
+      let questions = await quizSessionDao.addQuestions(value, user_email);
+      const questionId = questions[0].insertId;
       value.questionId = questionId;
       delete value.correct_answer;
       delete value.incorrect_answers;
@@ -61,4 +61,27 @@ async function getQuiz(params, token) {
   }
 }
 
-module.exports = { getQuiz, createSession };
+async function checkAnswer(answer, question_id) {
+  try {
+    let ansId = await quizSessionDao.getIdOfAnswer(answer, question_id);
+    const isAnswerRight = await quizSessionDao.checkAnswer(question_id, ansId);
+
+    return isAnswerRight;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function setScore(score, token) {
+  try {
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const email = decoded.email;
+    const ids = await quizSessionDao.getSessionAndUserIdByEmail(email);
+    const marks = await quizSessionDao.setScore(score, ids.sessionID);
+    return marks;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = { getQuiz, createSession, checkAnswer, setScore };

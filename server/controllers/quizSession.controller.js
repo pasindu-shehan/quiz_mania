@@ -56,4 +56,32 @@ async function getQuiz(req, res) {
   }
 }
 
-module.exports = { getQuiz, createSession };
+async function checkAnswer(req, res) {
+  try {
+    const { answer, question_id } = req.query;
+    const isAnswerRight = await quizSessionService.checkAnswer(
+      answer,
+      question_id,
+    );
+
+    sendSuccessResponse(res, isAnswerRight, "Answer Checked");
+  } catch (error) {
+    logger.error("quizController - checkAnswer error ", error);
+    sendErrorResponse(res, error.message);
+  }
+}
+
+async function setScore(req, res) {
+  try {
+    const token = req.cookies.access_token;
+    const score = req.query.score;
+
+    const setScore = await quizSessionService.setScore(score, token);
+    sendSuccessResponse(res, setScore, "Score Stored");
+  } catch (error) {
+    logger.error("quizController - setScore error ", error);
+    sendErrorResponse(res, error.message);
+  }
+}
+
+module.exports = { getQuiz, createSession, checkAnswer, setScore };
