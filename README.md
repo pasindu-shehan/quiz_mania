@@ -4,12 +4,12 @@ A full-stack quiz application that allows users to test their knowledge across v
 
 ## Features
 
-- 🔐 **User Authentication** - Secure registration and login system with JWT tokens and bcrypt password hashing
-- 📚 **Multiple Categories** - Choose from various quiz categories powered by Open Trivia Database
-- 🎯 **Customizable Difficulty** - Select from Easy, Medium, Hard, or Any difficulty level
-- ❓ **Question Types** - Multiple choice, True/False, or mixed question types
-- 📊 **Score Tracking** - Track your quiz performance and view your score history
-- 🔒 **Secure Sessions** - HTTP-only cookies for secure authentication
+- **User Authentication** - Secure registration and login system with JWT tokens and bcrypt password hashing
+- **Multiple Categories** - Choose from various quiz categories powered by Open Trivia Database
+- **Customizable Difficulty** - Select from Easy, Medium, Hard, or Any difficulty level
+- **Question Types** - Multiple choice, True/False, or mixed question types
+- **Score Tracking** - Track your quiz performance and view your score history
+- **Secure Sessions** - HTTP-only cookies for secure authentication
 
 ## Tech Stack
 
@@ -266,11 +266,11 @@ npm start
 
 ## Security Features
 
-- ✅ Password hashing with bcrypt
-- ✅ JWT-based authentication
-- ✅ HTTP-only cookies to prevent XSS attacks
-- ✅ Environment variables for sensitive data
-- ✅ SQL injection prevention with parameterized queries
+- Password hashing with bcrypt
+- JWT-based authentication
+- HTTP-only cookies to prevent XSS attacks
+- Environment variables for sensitive data
+- SQL injection prevention with parameterized queries
 
 ## Future Enhancements
 
@@ -303,4 +303,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-Built with ❤️ using React, Express, and MySQL
+Built with React, Express, and MySQL
